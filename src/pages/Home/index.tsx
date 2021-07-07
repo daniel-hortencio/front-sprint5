@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import CardProduct from '../../components/CardProduct';
 import ProductsContainer from '../../components/ProductsContainer';
 import { useMessage, useLoading, useProducts, useSearch } from '../../hooks';
-import { api } from '../../services/api';
+import api from '../../services/api';
 import { WebsiteTemplate } from '../../templates/Website';
 import { FilterTypes } from '../../types/filterTypes';
 import { NavLinkTypes } from '../../types/navLinksTypes';
@@ -14,7 +14,7 @@ const Home: React.FC = () => {
     [],
   );
   const [filters, setFilters] = useState<FilterTypes[] | undefined>([]);
-  const { search } = useSearch();
+  const { search, sort, sortBy } = useSearch();
   const { products, setProducts } = useProducts();
   const { addMessage } = useMessage();
   const { addRequest, removeRequest } = useLoading();
@@ -52,10 +52,12 @@ const Home: React.FC = () => {
         });
       })
       .finally(() => removeRequest());
+  }, []);
 
+  useEffect(() => {
     addRequest();
     api
-      .getProducts()
+      .getProducts({ search, sort, sortBy })
       .then((res: ProductTypes[]) => {
         setProducts(res);
       })
@@ -68,7 +70,7 @@ const Home: React.FC = () => {
         });
       })
       .finally(() => removeRequest());
-  }, []);
+  }, [search, sort, sortBy]);
 
   return (
     <WebsiteTemplate breadcrumbs={breadcrumbs} filters={filters}>

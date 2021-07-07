@@ -54,7 +54,8 @@
         "react/react-in-jsx-scope": "off",
         "no-console": "off",
         "react/no-array-index-key": "off",
-        "@typescript-eslint/no-explicit-any": "off"
+        "@typescript-eslint/no-explicit-any": "off",
+        "prefer-const": "off"
     },
     "settings": {
         "import/resolver": {

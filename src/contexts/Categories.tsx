@@ -1,5 +1,5 @@
 import React, { useState, createContext, useEffect } from 'react';
-import { api } from '../services/api';
+import api from '../services/api';
 import { NavLinkTypes } from '../types/navLinksTypes';
 
 import { useMessage, useLoading } from '../hooks';
@@ -26,11 +26,6 @@ export const CategoriesProvider: React.FC = ({ children }) => {
       .getCategories()
       .then((res: any) => {
         setCategories(res);
-
-        addMessage({
-          status: 'success',
-          text: 'Categorias carregadas com sucesso',
-        });
       })
       .catch((err: any) => {
         console.log(err);

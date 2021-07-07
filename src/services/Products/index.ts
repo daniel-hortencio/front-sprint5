@@ -3,20 +3,30 @@ import { FetchApi } from '../../utils/fetchApi';
 
 type SearchParamsDTO = {
     search?: string;
-};
-
-type ProductIdDTO = {
-    id: string;
+    sort?: 1 | -1 | undefined;
+    sortBy?: string | undefined;
 };
 
 export const getProducts = async (
-    baseUrl: string,
     params: SearchParamsDTO,
 ): Promise<ProductTypes[]> => {
-    const { search } = params;
-    const querySearch = search ? `search=${search}` : '';
+    const { search, sort, sortBy } = params;
 
-    return FetchApi(baseUrl, 'products', querySearch).then(res => {
+    console.log(params)
+
+    let querySearch = ""
+
+    if (search) {
+        querySearch += `search=${search}`
+    }
+    if (sort) {
+        querySearch += `&sort=${sort}`
+    }
+    if (sortBy) {
+        querySearch += `&sortBy=${sortBy}`
+    }
+
+    return FetchApi('products', querySearch).then(res => {
         const listProducts = res.map((product: any) => {
             return {
                 id: product.id,
@@ -31,13 +41,16 @@ export const getProducts = async (
 };
 
 export const getProductById = async (
-    baseUrl: string,
-    params: ProductIdDTO,
+    id: string,
 ): Promise<ProductTypes> => {
-    const { id } = params;
-    const querySearch = `id=${id}`;
 
-    return FetchApi(baseUrl, 'productById', querySearch).then(res => {
+    let querySearch = "";
+
+    if (id) {
+        querySearch = `id=${id}`;
+    }
+
+    return FetchApi('productById', querySearch).then(res => {
 
         const product = {
             id: res.id,

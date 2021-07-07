@@ -7,7 +7,7 @@ export const useSearch = () => {
   if (!context)
     throw new Error('useSearch must be used within a SearchProvider');
 
-  const { search, setSearch } = context;
+  const { search, setSearch, sort, sortBy, changeSearch, clearSort } = context;
 
-  return { search, setSearch };
+  return { search, setSearch, sort, sortBy, changeSearch, clearSort };
 };

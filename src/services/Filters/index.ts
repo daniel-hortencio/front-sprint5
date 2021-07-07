@@ -1,9 +1,9 @@
 import { FilterTypes } from "../../types/filterTypes";
 import { FetchApi } from '../../utils/fetchApi'
 
-export const getFilters = async (baseUrl: string): Promise<FilterTypes[]> => {
+export const getFilters = async (): Promise<FilterTypes[]> => {
 
-    return FetchApi(baseUrl, "filters").then(res => {
+    return FetchApi("filters").then(res => {
         const filterOptions = res.map((filter: any) => {
             return {
                 id: filter.id,

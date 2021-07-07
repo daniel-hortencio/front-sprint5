@@ -1,11 +1,9 @@
 import { NavLinkTypes } from "../../types/navLinksTypes";
 import { FetchApi } from '../../utils/fetchApi'
 
-export const getCategories = async (
-    baseUrl: string,
-): Promise<NavLinkTypes[]> => {
+export const getCategories = async (): Promise<NavLinkTypes[]> => {
 
-    return FetchApi(baseUrl, "categories").then(res => {
+    return FetchApi("categories").then(res => {
         const allCategories = res.map((category: any) => {
             return {
                 id: category.id,

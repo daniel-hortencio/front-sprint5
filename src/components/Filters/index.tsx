@@ -1,7 +1,7 @@
-import './styles.scss';
-
-import ImageArrow from '../../assets/filter.svg';
 import { FilterTypes } from '../../types/filterTypes';
+import FilterButton from '../FilterButton';
+
+import * as S from './styles';
 
 interface FiltersProps {
   filters: FilterTypes[] | undefined;
@@ -9,16 +9,15 @@ interface FiltersProps {
 
 const Filters: React.FC<FiltersProps> = ({ filters }) => {
   return (
-    <section className="main__filters filters">
-      <ul className="filters__list">
-        {filters?.map(filterOption => (
-          <li className="filters__item" key={filterOption.id}>
-            <span className="filters__label">{filterOption.label}</span>
-            <img className="filters__img" src={ImageArrow} />
-          </li>
-        ))}
-      </ul>
-    </section>
+    <S.Wrapper>
+      {filters?.map(filterOption => (
+        <FilterButton
+          key={filterOption.id}
+          id={filterOption.id}
+          label={filterOption.label}
+        />
+      ))}
+    </S.Wrapper>
   );
 };
 

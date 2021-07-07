@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { api } from '../../services/api';
+import api from '../../services/api';
 import { WebsiteTemplate } from '../../templates/Website';
 import { ProductTypes } from '../../types/productTypes';
 import { useLoading } from '../../hooks';
@@ -31,7 +31,7 @@ const Product: React.FC = () => {
     addRequest();
 
     api
-      .getProductById(id)
+      .getProductById(id as string)
       .then((res: ProductTypes) => setProduct(res))
       .catch((err: any) => console.log(err))
       .finally(() => removeRequest());

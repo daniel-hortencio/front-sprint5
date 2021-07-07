@@ -1,4 +1,4 @@
-import { api } from '../../services/api';
+import api from '../../services/api';
 
 import { useLoading, useMessage, useProducts, useSearch } from '../../hooks';
 
@@ -20,7 +20,7 @@ const SearchBar = () => {
 
     addRequest();
     api
-      .getProducts(search)
+      .getProducts({ search })
       .then((res: ProductTypes[]) => {
         setProducts(res);
       })

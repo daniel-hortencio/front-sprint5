@@ -25,6 +25,7 @@ export const WebsiteTemplate: React.FC<WebsiteTemplate> = ({
   filters,
 }) => {
   const { isLoading } = useLoading();
+
   return (
     <S.Wrapper>
       {isLoading && <Loading />}
